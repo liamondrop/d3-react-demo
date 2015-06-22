@@ -39,9 +39,10 @@ StackedBarChart.prototype.update = function update(data) {
         return values;
       })
       .entries(data);
-    const extents = d3.extent(buckets, d => { return +d.key; });
 
-    x.domain(extents);
+    const startDate = d3.min(buckets, d => { return +d.key; });
+
+    x.domain(d3.extent(buckets, d => { return +d.key; }));
     y.domain([0, d3.max(buckets, d => { return d.values.total; })]);
 
     svg.select(".x.axis").call(xAxis);
@@ -50,7 +51,7 @@ StackedBarChart.prototype.update = function update(data) {
     const padding   = 0.1;                            // horizontal space between bars
     const step      = bucketSize * (1 - padding * 2); // corrected for padding
     const offset    = step / 2;                       // center bar over the tick
-    const bandWidth = x(extents[0] - step) * -1;      // x func translates the step to chart proportions
+    const barWidth  = x(startDate + step);            // x func translates the step to chart proportions
 
     let bar = svg.selectAll(".bar")
         .data(buckets)
@@ -61,7 +62,7 @@ StackedBarChart.prototype.update = function update(data) {
     bar.selectAll("rect")
         .data(d => { return d.values; })
       .enter().append("rect")
-        .attr("width", bandWidth)
+        .attr("width", barWidth)
         .attr("y", d => { return y(d.y1); })
         .attr("height", d => { return y(d.y0) - y(d.y1); })
         .style("fill", d => { return color(d.type); });
