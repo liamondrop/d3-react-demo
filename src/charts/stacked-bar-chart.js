@@ -49,7 +49,7 @@ StackedBarChart.prototype.update = function update(data) {
 
     const padding   = 0.1;                        // horizontal space between bars
     const step      = bucket * (1 - padding * 2); // corrected for padding
-    const offset    = 0; // step / 2;                   // center bar over the tick
+    const offset    = step / 2;                   // center bar over the tick
     const bandWidth = x(extents[0] - step) * -1;  // x func translates the step to chart proportions
 
     let g = svg.selectAll(".g")
