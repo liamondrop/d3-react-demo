@@ -33,8 +33,7 @@ export default React.createClass({
               right: 20,
               bottom: 30
             }
-          }}
-        />
+          }}/>
       </div>
     );
   },
