@@ -1,7 +1,6 @@
 {
   "name": "d3-react-example",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
   "main": "src/app.js",
   "author": "Liam Bowers",
   "devDependencies": {
