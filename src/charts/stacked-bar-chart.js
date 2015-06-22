@@ -1,7 +1,7 @@
 import d3 from 'd3';
 
 const hour   = 3600000; // 1 hour = (60 * 60 * 1000)
-const bucket = hour * 3;
+const bucketSize = hour * 3;
 function StackedBarChart() {};
 
 StackedBarChart.prototype.update = function update(data) {
@@ -23,10 +23,10 @@ StackedBarChart.prototype.update = function update(data) {
 
     color.domain(d3.keys(data[0]).filter(key => { return key !== "date"; }));
 
-    // aggregates data into buckets
+    // aggregates time series data into buckets. Bucket size is 1 hour * scalar.
     // creates y values for stacking each separate data type
-    const nested = d3.nest()
-      .key(d => { return d.date - (d.date % bucket)})
+    const buckets = d3.nest()
+      .key(d => { return d.date - (d.date % bucketSize)})
       .rollup(data => {
         let y = 0;
         let total = 0;
@@ -39,26 +39,26 @@ StackedBarChart.prototype.update = function update(data) {
         return values;
       })
       .entries(data);
-    const extents = d3.extent(nested, d => { return +d.key; });
+    const extents = d3.extent(buckets, d => { return +d.key; });
 
     x.domain(extents);
-    y.domain([0, d3.max(nested, d => { return d.values.total; })]);
+    y.domain([0, d3.max(buckets, d => { return d.values.total; })]);
 
     svg.select(".x.axis").call(xAxis);
     svg.select(".y.axis").call(yAxis);
 
-    const padding   = 0.1;                        // horizontal space between bars
-    const step      = bucket * (1 - padding * 2); // corrected for padding
-    const offset    = step / 2;                   // center bar over the tick
-    const bandWidth = x(extents[0] - step) * -1;  // x func translates the step to chart proportions
+    const padding   = 0.1;                            // horizontal space between bars
+    const step      = bucketSize * (1 - padding * 2); // corrected for padding
+    const offset    = step / 2;                       // center bar over the tick
+    const bandWidth = x(extents[0] - step) * -1;      // x func translates the step to chart proportions
 
-    let g = svg.selectAll(".g")
-        .data(nested)
+    let bar = svg.selectAll(".bar")
+        .data(buckets)
       .enter().append("g")
-        .attr("class", "g")
+        .attr("class", "bar")
         .attr("transform", d => { return `translate(${x(d.key - offset)}, 0)`; });
 
-    g.selectAll("rect")
+    bar.selectAll("rect")
         .data(d => { return d.values; })
       .enter().append("rect")
         .attr("width", bandWidth)
