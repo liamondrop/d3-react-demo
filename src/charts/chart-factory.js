@@ -32,13 +32,11 @@ function ChartFactory(type, data, options, DOMNode) {
   return newChart;
 }
 
-// initial d3 setup, like merging options and defaults, and setting chart dimensions,
-// common for all charts. imagine we've defined a `defaults` hash of default options.
+// initial d3 setup, like merging options and defaults
 ChartFactory.prototype.initialize = function (data, options, DOMNode) {
   var opts = this.options = _.defaults(options || {}, defaultOpts);
 
   // set dimensions, translation offset for axes, etc. nothing related to data!
-  // more or less taken from d3 BarChart Tutorial at http://bost.ocks.org/mike/bar/3/
   this.height = opts.height - (opts.margin.top + opts.margin.bottom);
   this.width = opts.width - (opts.margin.right + options.margin.left);
   this.xAxis = d3.svg.axis().orient(options.xaxis.orientation);
