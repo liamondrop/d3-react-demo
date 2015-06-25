@@ -1,11 +1,8 @@
-import Router from './router';
+import React from 'react';
+import Panel from './components/panel';
+import DataCollection from './collections/data';
 
-let app = {
-  init() {
-    this.router = new Router();
-    this.router.history.start();
-    return this;
-  }
-};
+let dataStore = new DataCollection();
+dataStore.fetch();
 
-export default app.init();
+React.render(<Panel dataStore={dataStore}/>, document.getElementById('main'));
