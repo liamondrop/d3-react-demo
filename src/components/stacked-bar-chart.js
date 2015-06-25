@@ -1,29 +1,17 @@
 import React from 'react';
 import Chart from './chart';
 
-const totalData = [];
-const errorsOnlyData = [];
-
 export default React.createClass({
-  getInitialState() {
-    return {
-      errorsOnly: false
-    }
-  },
-
-  aggregateAppropriateData() {
-    if (this.state.errorsOnly) {
-      return errorsOnlyData;
-    }
-    return totalData;
+  propTypes: {
+    data: React.PropTypes.array.isRequired
   },
 
   render() {
     return (
-      <div>
+      <div className="chart">
         <Chart
-          type='StackedBarChart'
-          data={this.aggregateAppropriateData()}
+          type="StackedBarChart"
+          data={this.props.data}
           options={{
             height: 500,
             width: 960,
@@ -32,16 +20,14 @@ export default React.createClass({
               top: 20,
               right: 20,
               bottom: 30
-            }
+            },
+            yaxis: {
+              orientation: 'right'
+            },
+            allTypes: ['errors', 'successes']
           }}
         />
       </div>
     );
-  },
-
-  _onToggleErrorsOnly() {
-    this.setState({
-      errorsOnly: !this.state.errorsOnly
-    });
   }
 });
