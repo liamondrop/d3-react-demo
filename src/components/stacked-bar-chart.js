@@ -23,8 +23,7 @@ export default React.createClass({
             },
             yaxis: {
               orientation: 'right'
-            },
-            allTypes: ['errors', 'successes']
+            }
           }}
         />
       </div>

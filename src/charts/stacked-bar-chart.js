@@ -6,8 +6,7 @@ function StackedBarChart() {};
 
 StackedBarChart.prototype.update = function update(data) {
   const {xAxis, yAxis, svg, width, height} = this;
-  const {allTypes} = this.options,
-        currentTypes = d3.keys(data[0]).filter(d => {
+  const dataTypes = d3.keys(data[0]).filter(d => {
           return d !== 'date';
         });
 
@@ -15,16 +14,16 @@ StackedBarChart.prototype.update = function update(data) {
         y = d3.scale.linear().rangeRound([height, 0]),
         color = d3.scale.category20();
 
-  color.domain(allTypes);
+  color.domain(dataTypes);
 
   // aggregates time series data into buckets (e.g. 1 hour * scalar)
-  // creates y values for stacking each separate process type
+  // creates y values for stacking each separate data type
   const buckets = d3.nest()
     .key(d => { return d.date - (d.date % step)})
     .rollup(values => {
       let y = 0;
       let total = 0;
-      let aggregate = currentTypes.map(type => {
+      let aggregate = dataTypes.map(type => {
         let y0 = y;
         let y1 = total = y += d3.sum(values, d => { return d[type]; });
         return {type, y0, y1};
@@ -38,7 +37,7 @@ StackedBarChart.prototype.update = function update(data) {
         endDate = d3.max(buckets, d => { return +d.key; }) + step; // add an extra step to round nicely
 
   let legend = svg.selectAll('.legend')
-        .data(allTypes)
+        .data(dataTypes)
       .enter().append('g')
         .attr('class', 'legend')
         .attr('transform', (d, i) => { return `translate(0, ${i * 20})`; });
