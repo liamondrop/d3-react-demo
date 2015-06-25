@@ -80,6 +80,11 @@ body {
   shape-rendering: crispEdges;
 }
 
+.axis .minor line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
 .bar {
   stroke: #fff;
   stroke-width: 1;
@@ -91,9 +96,4 @@ body {
 
 .y.axis path {
   display: none;
-}
-
-.y.axis .tick line {
-  stroke: #777;
-  stroke-dasharray: 2,2;
 }

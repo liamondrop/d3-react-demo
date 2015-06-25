@@ -86,9 +86,14 @@ StackedBarChart.prototype.update = function update(data) {
     rects.exit().remove();
 
     svg.select('.x.axis').transition().call(xAxis);
-    svg.select('.y.axis').transition()
-        .call(yAxis)
-      .selectAll('text')
+
+    let gy = svg.select('.y.axis').transition()
+        .call(yAxis);
+
+    gy.selectAll('g').filter(d => { return d !== 0; })
+        .attr('class', 'tick minor');
+
+    gy.selectAll('text')
         .attr('x', -5)
         .attr('dy', 5)
         .style('text-anchor', 'end');
