@@ -1,7 +1,6 @@
 import React from 'react';
 import ChartFactory from '../charts/chart-factory';
 
-
 export default React.createClass({
   propTypes: {
     type: React.PropTypes.string.isRequired,
@@ -9,7 +8,6 @@ export default React.createClass({
     options: React.PropTypes.object
   },
 
-  // create chart and do first data bind
   componentDidMount() {
     this._chart = new ChartFactory(
       this.props.type,
