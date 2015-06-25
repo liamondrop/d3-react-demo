@@ -10,4 +10,4 @@ Also demonstrates interesting bits and pieces, like bucketing messy time series 
 
 Note that you'll need some kind of basic http server for this to work, as the chart data is called via XMLHTTPRequest. That has been left as an exercise for the reader, atm.
 
-*TODO: Dev Server? Flux?
+*TODO: Add tooltips. Flux?
