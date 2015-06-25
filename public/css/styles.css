@@ -1,0 +1,99 @@
+html,
+body,
+div {
+ margin: 0;
+ padding: 0; 
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.42857;
+  color: #333333;
+  background-color: #ededed;
+}
+
+.container {
+  width: 980px;
+  margin: 0 auto;
+}
+
+.panel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-default {
+  border-color: #ddd;
+}
+
+.panel-footer {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+}
+
+.btn-primary {
+  color: white;
+  background-color: rgb(51, 139, 200);
+}
+
+.btn-primary:hover {
+  color: white;
+  background-color: rgb(31, 119, 180);
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.bar rect {
+  opacity: 0.75;
+}
+
+.y.axis path {
+  display: none;
+}
+
+.y.axis .tick line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
