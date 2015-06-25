@@ -2,7 +2,7 @@
 
 Quick and dirty exercise, filling in some of the implementation details omitted from [this article](http://blog.siftscience.com/blog/2015/4/6/d-threeact-how-sift-science-made-d3-react-besties).
 
-Also demonstrates interesting bits and pieces, like bucketing messy time series data into even chunks (e.g. hours), and how to generate bar widths on time scales, which D3 forgot(?) to include. Uses Ampersand's "rest collection" as a data store.
+Also demonstrates interesting bits and pieces, like bucketing messy time series data into even chunks (e.g. hours), and how to generate bar widths on time scales, which D3 forgot(?) to include. Uses AmpersandJS's "[Rest Collection](https://github.com/ampersandjs/ampersand-rest-collection)" as a data store.
 
 `npm install` gets all your dependencies.
 
